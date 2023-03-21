@@ -52,7 +52,7 @@
 (setq org-directory "~/org/")
 
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
-(setq which-key-idle-delay 0.4)  ;; search don't go to the beginning of the file
+(setq which-key-idle-delay 0.1)  ;; search don't go to the beginning of the file
 (setq isearch-wrap-function 'ignore)
 (setq evil-search-wrap nil)
 
@@ -70,6 +70,9 @@
 
 (remove-hook 'doom-first-input-hook #'evil-snipe-mode)  ;; Restoring old substitution behavior on s/S
 
+
+;; modeline configure
+(display-time-mode t) ;; display time in modeline
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
@@ -273,8 +276,8 @@
                                         ;      :leader
                                         ;      :prefix ("d" . "doom")
 
-(evil-define-key* '(normal insert) 'global
-  (kbd "C-c ,") #'+company/complete)
+                                        ;(evil-define-key* '(normal insert) 'global
+                                        ;  (kbd "C-c ,") #'+company/complete)
 
                                         ;(evil-define-key* '(normal motion) 'global
                                         ;  (kbd "C-o") #'evil-jump-backward
