@@ -35,7 +35,13 @@
 ;;
 ;; good theme: 'doom-gruvbox, 'doom-zenburn 'doom-miramare 'doom-one
 (setq doom-theme 'doom-miramare)
-(setq doom-font (font-spec :family "InputMono" :size 14.0 :weight 'bold))
+
+(cond
+ (IS-LINUX
+  (setq doom-font (font-spec :family "Input Mono" :size 14.0 :weight 'bold)))
+ (IS-MAC
+  (setq doom-font (font-spec :family "Input Mono" :size 20.0 :weight 'bold)))
+ )
 
 ;; this determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -105,9 +111,9 @@
   :hook ((c-mode-common . helm-mode)   ; equal to (add-hook 'c-mode-hook #'helm-mode)
          (python-mode . helm-mode))
   :init
-  ;'(helm-ag-base-command "ag --nocolor --nogroup -w")
-  ;'(helm-ag-command-option "--all-text")
-  ;'(helm-ag--ignore-case)
+                                        ;'(helm-ag-base-command "ag --nocolor --nogroup -w")
+                                        ;'(helm-ag-command-option "--all-text")
+                                        ;'(helm-ag--ignore-case)
   (setq helm-ag-insert-at-point 'symbol
         helm-ag-ignore-buffer-patterns '("\\.txt\\'" "\\.mkd\\'" "TAGS"))
   (global-set-key (kbd "C-c a") 'helm-ag-project-root)
@@ -128,12 +134,12 @@
               (lambda () (evil-scroll-line-to-center (line-number-at-pos))))
   (advice-add 'counsel-etags-list-tag :after
               (lambda () (evil-scroll-line-to-center (line-number-at-pos))))
-  ;(map! (:map
-  ;       evil-motion-state-map
-  ;       "C-]" #'counsel-etags-find-tag-at-point
-  ;       :map c-mode-base-map
-  ;       :prefix "C-c"
-  ;       "C-u" #'counsel-etags-update-tags-force))
+                                        ;(map! (:map
+                                        ;       evil-motion-state-map
+                                        ;       "C-]" #'counsel-etags-find-tag-at-point
+                                        ;       :map c-mode-base-map
+                                        ;       :prefix "C-c"
+                                        ;       "C-u" #'counsel-etags-update-tags-force))
   :config
   (setq counsel-etags-update-interval 60)
   ;; counsel-etags-ignore-directories does NOT support wildcast
@@ -145,35 +151,35 @@
 
 (use-package! deepni
   :after (evil format-all)
-  ;:hook evil-mode  ;; BUG Not work
+                                        ;:hook evil-mode  ;; BUG Not work
   :bind (:map deepni-mode-map
               ("C-c C-f" . #'deepni/format-code))
   :init
   (add-hook 'evil-mode-hook #'deepni-mode)
   :config
-  (deepni/goto-center (evil-goto-mark
-                       pop-tag-mark
-                       evil-jump-forward
-                       evil-jump-backward
+  (deepni/goto-center (pop-tag-mark
+                                        ;evil-goto-mark
                        evil-ex-search-next
                        evil-ex-search-previous
                        evil-ex-search-word-backward
-                       evil-ex-search-word-forward)))
+                       evil-ex-search-word-forward
+                       evil-jump-forward
+                       evil-jump-backward)))
 
-  ;(global-set-key (kbd "C-c C-f") #'deepni/format-code))
+                                        ;(global-set-key (kbd "C-c C-f") #'deepni/format-code))
 
-;(after! evil
-;  (deepni/goto-center #'(evil-goto-mark
-;                         pop-tag-mark
-;                         evil-jump-forward
-;                         evil-jump-backward
-;                         evil-ex-search-next
-;                         evil-ex-search-previous
-;                         evil-ex-search-word-backward
-;                         evil-ex-search-word-forward)))
+                                        ;(after! evil
+                                        ;  (deepni/goto-center #'(evil-goto-mark
+                                        ;                         pop-tag-mark
+                                        ;                         evil-jump-forward
+                                        ;                         evil-jump-backward
+                                        ;                         evil-ex-search-next
+                                        ;                         evil-ex-search-previous
+                                        ;                         evil-ex-search-word-backward
+                                        ;                         evil-ex-search-word-forward)))
 
-;(after! counsel-etags
-;  (deepni/goto-center #'(counsel-etags-find-tag-at-point)))
+                                        ;(after! counsel-etags
+                                        ;  (deepni/goto-center #'(counsel-etags-find-tag-at-point)))
 
 (after! hl-todo
   (map! :map hl-todo-mode-map
@@ -181,6 +187,9 @@
         "i" #'hl-todo-insert
         "o" #'hl-todo-occur))
 
+(after! counsel
+  (advice-add 'counsel-bookmark :after
+              (lambda () (evil-scroll-line-to-center (line-number-at-pos)))))
 
 (after! evil (defalias #'forward-evil-word #'forward-evil-symbol)) ;; see characters with - or _ as one word
 
@@ -197,14 +206,24 @@
         company-minimum-prefix-length 1
         ;; items in the company list are sorted by frequency of use
         company-transformers '(company-sort-by-occurrence)
-        company-selection-wrap-around t))
+        company-selection-wrap-around t)
+  (add-to-list 'company-backends 'company-files t))
 
 ;; TODO add workspace in modeline
-;(after! doom-modeline
-;  (setq doom-modeline-persp-name t))
+                                        ;(after! doom-modeline
+                                        ;  (setq doom-modeline-persp-name t))
 
 
 ;; NOTE Keybindings
+
+(when IS-GUI
+  ;; GUI work mode
+  (map! "C-," #'+company/complete))
+
+(when (not IS-GUI)
+  ;; Terminal work mode
+  (map! :prefix "C-c"
+        "," #'+company/complete))
 
 (map! "C-s" #'counsel-grep-or-swiper)
 
@@ -250,16 +269,16 @@
       "C-k" #'find-function-on-key
       "C-b" #'counsel-descbinds)
 
-;(map! :map evil-normal-state-map
-;      :leader
-;      :prefix ("d" . "doom")
+                                        ;(map! :map evil-normal-state-map
+                                        ;      :leader
+                                        ;      :prefix ("d" . "doom")
 
 (evil-define-key* '(normal insert) 'global
-  (kbd "C-,") #'+company/complete)
+  (kbd "C-c ,") #'+company/complete)
 
-;(evil-define-key* '(normal motion) 'global
-;  (kbd "C-o") #'evil-jump-backward
-;  (kbd "C-i") #'evil-jump-forward)
+                                        ;(evil-define-key* '(normal motion) 'global
+                                        ;  (kbd "C-o") #'evil-jump-backward
+                                        ;  (kbd "C-i") #'evil-jump-forward)
 
 (evil-define-key* 'normal 'global
   (kbd "C-w O") #'delete-other-windows
@@ -273,12 +292,12 @@
   (kbd "C-k") #'evil-ex-nohighlight
   (kbd "C-n") #'+workspace/new-named)
 
-;(define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
-;(define-key evil-normal-state-map (kbd "C-x") 'evil-numbers/dec-at-pt)
-;(define-key evil-normal-state-map (kbd "C-=") 'evil-window-increase-height)
-;(define-key evil-normal-state-map (kbd "C--") 'evil-window-decrease-height)
-;(define-key evil-normal-state-map (kbd "C-.") 'evil-window-increase-width)
-;(define-key evil-normal-state-map (kbd "C-,") 'evil-window-decrease-width)
+                                        ;(define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
+                                        ;(define-key evil-normal-state-map (kbd "C-x") 'evil-numbers/dec-at-pt)
+                                        ;(define-key evil-normal-state-map (kbd "C-=") 'evil-window-increase-height)
+                                        ;(define-key evil-normal-state-map (kbd "C--") 'evil-window-decrease-height)
+                                        ;(define-key evil-normal-state-map (kbd "C-.") 'evil-window-increase-width)
+                                        ;(define-key evil-normal-state-map (kbd "C-,") 'evil-window-decrease-width)
 
 (evil-define-key* 'insert 'global
   (kbd "C-h") #'left-char
@@ -295,7 +314,7 @@
   (kbd "*") #'evil-ex-search-word-forward
   (kbd "#") #'evil-ex-search-word-backward)
 
-;(define-key evil-motion-state-map (kbd "C-1") #'+workspace/switch-to-0)
-;(define-key evil-motion-state-map (kbd "C-2") #'+workspace/switch-to-1)
-;(define-key evil-motion-state-map (kbd "C-3") #'+workspace/switch-to-2)
-;(define-key evil-motion-state-map (kbd "C-4") #'+workspace/switch-to-3)
+                                        ;(define-key evil-motion-state-map (kbd "C-1") #'+workspace/switch-to-0)
+                                        ;(define-key evil-motion-state-map (kbd "C-2") #'+workspace/switch-to-1)
+                                        ;(define-key evil-motion-state-map (kbd "C-3") #'+workspace/switch-to-2)
+                                        ;(define-key evil-motion-state-map (kbd "C-4") #'+workspace/switch-to-3)

@@ -26,7 +26,8 @@
              (+format/buffer))
     ('c++-mode (hide-ifdefs)
                (+format/buffer))
-    ('python-mode (+format/buffer))))
+    ('python-mode (+format/buffer))
+    (_ (+format/buffer))))
 
 (defun deepni/save-layout ()
   "Save current layout to file."
