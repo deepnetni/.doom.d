@@ -40,10 +40,10 @@
  (IS-LINUX
   (setq doom-font (font-spec :family "Input Mono" :size 14.0 :weight 'bold)))
  (IS-MAC
-  (setq doom-font (font-spec :family "Input Mono" :size 20.0 :weight 'bold)))
+  (setq doom-font (font-spec :family "Input Mono" :size 14.0 :weight 'bold)))
  )
 
-;; this determines the style of line numbers in effect. If set to `nil', line
+;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
@@ -52,7 +52,6 @@
 (setq org-directory "~/org/")
 
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
-(setq which-key-idle-delay 0.1)  ;; search don't go to the beginning of the file
 (setq isearch-wrap-function 'ignore)
 (setq evil-search-wrap nil)
 
@@ -183,6 +182,8 @@
 
                                         ;(after! counsel-etags
                                         ;  (deepni/goto-center #'(counsel-etags-find-tag-at-point)))
+(after! which-key
+  (setq which-key-idle-delay 0.4))  ;; search don't go to the beginning of the file
 
 (after! hl-todo
   (map! :map hl-todo-mode-map
@@ -275,10 +276,6 @@
                                         ;(map! :map evil-normal-state-map
                                         ;      :leader
                                         ;      :prefix ("d" . "doom")
-
-                                        ;(evil-define-key* '(normal insert) 'global
-                                        ;  (kbd "C-c ,") #'+company/complete)
-
                                         ;(evil-define-key* '(normal motion) 'global
                                         ;  (kbd "C-o") #'evil-jump-backward
                                         ;  (kbd "C-i") #'evil-jump-forward)
