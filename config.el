@@ -33,8 +33,10 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 ;;
-;; good theme: 'doom-gruvbox, 'doom-zenburn 'doom-miramare 'doom-one
-;(setq doom-theme 'doom-miramare)
+;; good theme:
+;; 'doom-peacock, 'doom-opera, 'doom-gruvbox,
+;; 'doom-zenburn 'doom-miramare 'doom-one,
+;; 'doom-monokai-octagon/pro 'doom-miramare
 
 (if IS-GUI
     (setq doom-theme 'obsidian)
@@ -139,12 +141,6 @@
               (lambda () (evil-scroll-line-to-center (line-number-at-pos))))
   (advice-add 'counsel-etags-list-tag :after
               (lambda () (evil-scroll-line-to-center (line-number-at-pos))))
-                                        ;(map! (:map
-                                        ;       evil-motion-state-map
-                                        ;       "C-]" #'counsel-etags-find-tag-at-point
-                                        ;       :map c-mode-base-map
-                                        ;       :prefix "C-c"
-                                        ;       "C-u" #'counsel-etags-update-tags-force))
   :config
   (setq counsel-etags-update-interval 60)
   ;; counsel-etags-ignore-directories does NOT support wildcast
@@ -164,27 +160,15 @@
   :config
   (deepni/goto-center (pop-tag-mark
                                         ;evil-goto-mark
-                       evil-ex-search-next
-                       evil-ex-search-previous
+                                        ;evil-ex-search-next
+                                        ;evil-ex-search-previous
+                       better-jumper-jump_backward
+                       better-jumper-jump_forward
                        evil-ex-search-word-backward
                        evil-ex-search-word-forward
                        evil-jump-forward
                        evil-jump-backward)))
 
-                                        ;(global-set-key (kbd "C-c C-f") #'deepni/format-code))
-
-                                        ;(after! evil
-                                        ;  (deepni/goto-center #'(evil-goto-mark
-                                        ;                         pop-tag-mark
-                                        ;                         evil-jump-forward
-                                        ;                         evil-jump-backward
-                                        ;                         evil-ex-search-next
-                                        ;                         evil-ex-search-previous
-                                        ;                         evil-ex-search-word-backward
-                                        ;                         evil-ex-search-word-forward)))
-
-                                        ;(after! counsel-etags
-                                        ;  (deepni/goto-center #'(counsel-etags-find-tag-at-point)))
 (after! which-key
   (setq which-key-idle-delay 0.4))  ;; search don't go to the beginning of the file
 
@@ -222,7 +206,7 @@
 
 (after! doom-zenburn-theme
   (custom-set-faces!
-    '(custom-themed :background "#293134")   ;; configure the color of theme background, zenburn-bg
+    ;; TODO configure the color of theme background, zenburn-bg, not work '(custom-themed :background "#293134")
     '(font-lock-variable-name-face :foreground "#93c763")
     `(font-lock-function-name-face :foreground ,(doom-color 'dark-cyan))
     `(region :background ,(doom-color 'base7))
