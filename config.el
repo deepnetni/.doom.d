@@ -220,6 +220,13 @@
                                         ;(after! doom-modeline
                                         ;  (setq doom-modeline-persp-name t))
 
+(after! doom-zenburn-theme
+  (custom-set-faces!
+    '(custom-themed :background "#293134")   ;; configure the color of theme background, zenburn-bg
+    '(font-lock-variable-name-face :foreground "#93c763")
+    `(font-lock-function-name-face :foreground ,(doom-color 'dark-cyan))
+    `(region :background ,(doom-color 'base7))
+    ))
 
 ;; NOTE Keybindings
 
