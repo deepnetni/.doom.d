@@ -50,9 +50,13 @@
 (display-graphic-p)
 
 (message "%s" IS-MAC)
+
 (message "%s" IS-WINDOWS)
+
 (message "%s" IS-BSD)
+
 (message "%s" IS-LINUX)
+
 
 (defun testpcase (arg)
   (pcase arg

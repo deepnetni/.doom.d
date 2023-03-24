@@ -34,14 +34,17 @@
 ;; `load-theme' function. This is the default:
 ;;
 ;; good theme: 'doom-gruvbox, 'doom-zenburn 'doom-miramare 'doom-one
-(setq doom-theme 'doom-miramare)
+;(setq doom-theme 'doom-miramare)
+
+(if IS-GUI
+    (setq doom-theme 'obsidian)
+  (setq doom-theme 'doom-zenburn))
 
 (cond
  (IS-LINUX
   (setq doom-font (font-spec :family "Input Mono" :size 14.0 :weight 'bold)))
  (IS-MAC
-  (setq doom-font (font-spec :family "Input Mono" :size 14.0 :weight 'bold)))
- )
+  (setq doom-font (font-spec :family "Input Mono" :size 14.0 :weight 'bold))))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -56,7 +59,7 @@
 (setq evil-search-wrap nil)
 
 ;; coding system
-(set-default buffer-file-coding-system 'utf-8-unix)
+(set-default buffer-file-coding-system 'utf-8-unix)   ;; replace CRLF(\r\n) with LF(\n)
 (set-default-coding-systems 'utf-8-unix)
 (set-language-environment 'Chinese-GB)    ;; to support Chinese characters
 (prefer-coding-system 'gb2312)
