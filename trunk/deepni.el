@@ -29,6 +29,20 @@
     ('python-mode (+format/buffer))
     (_ (+format/buffer))))
 
+;;;###autoload
+(defun deepni/add-remove-backends (opt backend)
+  (when (boundp 'company-backends)
+                                        ;(make-local-variable 'company-backends)
+    (message "### in %s" company-backends)
+    (pcase opt
+      ;; add
+      ('add (add-to-list 'company-backends backend))
+      ;; remove
+      ('remove
+       (setq company-backends (delete backend company-backends))))
+    (message "### out %s" company-backends)
+    ))
+
 (defun deepni/save-layout ()
   "Save current layout to file."
   (interactive)
@@ -41,7 +55,6 @@
     (message "### %s %s" fname (file-exists-p fname))
     (when (file-exists-p fname)
       (persp-load-state-from-file fname))))
-
 
 ;; NOTE define minor mode
 

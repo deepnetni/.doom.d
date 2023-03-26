@@ -114,7 +114,7 @@
 ;; NOTE Packages
 
 (use-package! helm-ag
-  :defer t
+  :defer
   :hook ((c-mode-common . helm-mode)   ; equal to (add-hook 'c-mode-hook #'helm-mode)
          (python-mode . helm-mode))
   :init
@@ -128,7 +128,7 @@
   (global-set-key (kbd "C-j") 'helm-resume))
 
 (use-package! counsel-etags
-  :defer t
+  :defer
   :bind (:map evil-motion-state-map
          ("C-]" . #'counsel-etags-find-tag-at-point)
          :map c-mode-base-map
@@ -154,7 +154,7 @@
   :after (evil format-all)
                                         ;:hook evil-mode  ;; BUG Not work
   :bind (:map deepni-mode-map
-              ("C-c C-f" . #'deepni/format-code))
+              ("C-c C-f" . #'deepni/format-code))  ;; using `:bind' will load package when bootup
   :init
   (add-hook 'evil-mode-hook #'deepni-mode)
   :config
@@ -171,6 +171,9 @@
 
 (after! which-key
   (setq which-key-idle-delay 0.4))  ;; search don't go to the beginning of the file
+
+                                        ;(after! lookup
+                                        ;  (push '("bing.com" . "https://www.bing.com/search?q=%s") +lookup-provider-url-alist))
 
 (after! hl-todo
   (map! :map hl-todo-mode-map

@@ -31,7 +31,7 @@
                 (lambda (&rest _)
                   (message "## after done")))))
 
-;(fadd #'(print-name print-name_1))
+                                        ;(fadd #'(print-name print-name_1))
 (advice-add 'print-name :after
             (lambda (&rest _)
               (message "## after done")))
@@ -42,7 +42,7 @@
 
 (tm (1 2 3))
 
-;(print-name :first "first arg" :key "this is key")
+                                        ;(print-name :first "first arg" :key "this is key")
 (window-system)
 
 (system-name)
@@ -79,3 +79,35 @@
  (IS-LINUX (message "linux"))
  (IS-WINDOWS (message "windows"))
  )
+
+(setq a '(1 2 3))
+
+(push '(4 3) a)
+
+
+(delete 'company-capf company-backends)
+
+(setq company-backends (delete 'company-capf company-backends))
+
+(message "%s" company-backends)
+
+(defun deepni/add-remove-backends (opt backend)
+  (when (boundp 'company-backends)
+    (message "in %s" company-backends)
+                                        ;(make-local-variable 'company-backends)
+    (pcase opt
+      ;; add
+      ('add (add-to-list 'company-backends backend)
+            (message "out %s" company-backends)
+            )
+      ;; remove
+      ('remove
+       (setq company-backends (delete backend company-backends))))
+    ))
+
+(deepni/add-remove-backends 'add 'company-capf)
+
+(deepni/add-remove-backends 'remove 'company-capf)
+
+
+(message "%s" company-backends)
