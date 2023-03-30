@@ -191,7 +191,11 @@
   (add-hook 'c-mode-common-hook (lambda ()
                                   (setq hide-ifdef-shadow t)
                                   (hide-ifdef-mode)
-                                  (hide-ifdefs))))
+                                  (hide-ifdefs)))
+  ;;(set-company-backend! '(c-mode c++-mode)
+  ;;  '((:separate company-irony-c-headers company-irony)
+  ;;    company-files))
+  )
 
 ;; company
 (after! company
