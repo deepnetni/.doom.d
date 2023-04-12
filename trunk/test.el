@@ -111,3 +111,6 @@
 
 
 (message "%s" company-backends)
+
+
+(file-exists-p "~/anaconda3/envs/work3")

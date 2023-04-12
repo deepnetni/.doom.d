@@ -44,9 +44,14 @@
 
 (cond
  (IS-LINUX
-  (setq doom-font (font-spec :family "Input Mono" :size 14.0 :weight 'bold)))
+  (setq doom-font (font-spec :family "Input Mono" :size 14.0 :weight 'bold))
+  (setq python-workon-env "~/anaconda3/envs/pytorch"))
  (IS-MAC
-  (setq doom-font (font-spec :family "Input Mono" :size 14.0 :weight 'bold))))
+  (setq doom-font (font-spec :family "Input Mono" :size 14.0 :weight 'bold))
+  (setq python-workon-env "~/anaconda3/envs/work"))
+ (t
+  (message "### work on others platform")
+  (setq python-workon-env nil)))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -201,11 +206,25 @@
 (after! company
   (setq company-idle-delay 0.1
         company-tooltip-align-annotations t
-        company-minimum-prefix-length 1
+        company-minimum-prefix-length 2
         ;; items in the company list are sorted by frequency of use
         company-transformers '(company-sort-by-occurrence)
         company-selection-wrap-around t)
   (add-to-list 'company-backends 'company-files t))
+
+;; configure anaconda mode company backends by adding backends to `+company-backend-alist'
+;;(after! anaconda-mode
+;;  (set-company-backend! 'anaconda-mode
+;;    '((:separate company-anaconda company-capf company-files)
+;;      company-yasnippet))
+;;  (message "### init anaconda %s" +company-backend-alist)
+;;  )
+
+(after! python
+  (when (file-exists-p "~/.pylintrc")
+    (setq flycheck-pylintrc "~/.pylintrc"))
+  (when (file-exists-p python-workon-env)
+    (pyvenv-activate python-workon-env)))
 
 ;; TODO add workspace in modeline
                                         ;(after! doom-modeline
@@ -240,6 +259,11 @@
       :prefix "C-c"
       "d" #'hide-ifdef-define
       "u" #'hide-ifdef-undef)
+
+;; python part
+(map! :after anaconda-mode
+      :map anaconda-mode-map
+      "C-," #'anaconda-mode-complete)
 
 (map! :leader
       :prefix "f"
