@@ -221,6 +221,7 @@
 ;;  )
 
 (after! python
+  (setq flycheck-flake8-maximum-line-length 90)
   (when (file-exists-p "~/.pylintrc")
     (setq flycheck-pylintrc "~/.pylintrc"))
   (when (file-exists-p python-workon-env)
