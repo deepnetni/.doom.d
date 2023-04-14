@@ -114,3 +114,16 @@
 
 
 (file-exists-p "~/anaconda3/envs/work3")
+
+
+(defun test-interactive (arg)
+  (interactive "bbuffer-name:")
+  (message arg))
+
+(expand-file-name (buffer-name))
+
+(defun deepni/run-current-python-file (fname)
+  "Run current python file pointed by `FNAME'."
+  (interactive "bRun File: ")
+  (message fname)
+  (message (expand-file-name (buffer-name))))

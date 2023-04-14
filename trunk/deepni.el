@@ -8,11 +8,13 @@
 (require 'hideif)
 (require 'format-all)
 (require 'evil)
+;;(require 'ivy)
 
 ;;; Code:
 
 ;;;###autoload
 (defmacro deepni/goto-center (args)
+  "Move the line outputed by ARGS to center."
   `(dolist (tgt ',args)
      (advice-add tgt :after (lambda (&rest _)
                               (evil-scroll-line-to-center (line-number-at-pos))))))
