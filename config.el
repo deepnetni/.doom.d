@@ -235,15 +235,13 @@
 (after! doom-zenburn-theme
   (custom-set-faces!
     ;; TODO configure the color of theme background, zenburn-bg, not work '(custom-themed :background "#293134")
-    '(font-lock-variable-name-face :foreground "#93c763")
-    '(font-lock-keyword-face :foreground "#99B767")
     `(font-lock-function-name-face :foreground ,(doom-color 'dark-cyan))
     `(region :background ,(doom-color 'base7))
     `(evil-ex-lazy-highlight :background ,(doom-color 'base7))
-    ;;`(font-lock-highlighting-faces :background ,(doom-color 'base7))
-    )
-  ;;(custom-set-faces '(evil-ex-lazy-highlight ((t (:inherit isearch)))))
-  )
+    '(font-lock-variable-name-face :foreground "#88C058")
+    '(font-lock-keyword-face :foreground "#99B767")
+    '(font-lock-comment-face :foreground "#749574")
+    '(font-lock-apply-highlight :background "#81CACD")))
 
 ;; NOTE Keybindings
 
