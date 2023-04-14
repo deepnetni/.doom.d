@@ -45,7 +45,7 @@
 (cond
  (IS-LINUX
   (setq doom-font (font-spec :family "Input Mono" :size 14.0 :weight 'bold))
-  (setq python-workon-env "~/anaconda3/envs/pytorch"))
+  (setq python-workon-env "~/Tools/anaconda3/envs/pytorch"))
  (IS-MAC
   (setq doom-font (font-spec :family "Input Mono" :size 14.0 :weight 'bold))
   (setq python-workon-env "~/anaconda3/envs/work"))
@@ -265,6 +265,12 @@
 (map! :after anaconda-mode
       :map anaconda-mode-map
       "C-," #'anaconda-mode-complete)
+
+;; NOTE the [feature] followd :after should be a package name in the `SPACE h p' list
+(map! :after python
+      :map python-mode-map
+      :n "M-n" #'+ivy/compile
+      :n "C-c C-c" #'kill-compilation)
 
 (map! :leader
       :prefix "f"
