@@ -224,8 +224,11 @@
   (setq flycheck-flake8-maximum-line-length 90)
   (when (file-exists-p "~/.pylintrc")
     (setq flycheck-pylintrc "~/.pylintrc"))
-  (when (file-exists-p python-workon-env)
-    (pyvenv-activate python-workon-env)))
+  ;; (when (file-exists-p python-workon-env)
+  ;;   ;; (pythonic-activate python-workon-env)
+  ;;   (pyvenv-activate python-workon-env))
+  (pyvenv-workon "pytorch")           ; need set $WORKON_HOME to anaconda envs in terminal
+  )
 
 ;; TODO add workspace in modeline
                                         ;(after! doom-modeline
@@ -264,13 +267,16 @@
 ;; python part
 (map! :after anaconda-mode
       :map anaconda-mode-map
-      "C-," #'anaconda-mode-complete)
+      :i "C-," #'anaconda-mode-complete)
 
 ;; NOTE the [feature] followd :after should be a package name in the `SPACE h p' list
 (map! :after python
       :map python-mode-map
       :n "M-n" #'+ivy/compile
-      :n "C-c C-c" #'kill-compilation)
+      :n "C-c C-c" #'kill-compilation
+      :prefix "C-c C-p"
+      :desc "activate conda env"
+      :n "c" #'pyvenv-workon)
 
 (map! :leader
       :prefix "f"
