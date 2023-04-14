@@ -44,14 +44,12 @@
 
 (cond
  (IS-LINUX
-  (setq doom-font (font-spec :family "Input Mono" :size 14.0 :weight 'bold))
-  (setq python-workon-env "~/Tools/anaconda3/envs/pytorch"))
+  (setq doom-font (font-spec :family "Input Mono" :size 14.0 :weight 'bold)))
  (IS-MAC
-  (setq doom-font (font-spec :family "Input Mono" :size 14.0 :weight 'bold))
-  (setq python-workon-env "~/anaconda3/envs/work"))
+  (setq doom-font (font-spec :family "Input Mono" :size 14.0 :weight 'bold)))
  (t
   (message "### work on others platform")
-  (setq python-workon-env nil)))
+  ))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -227,8 +225,8 @@
   ;; (when (file-exists-p python-workon-env)
   ;;   ;; (pythonic-activate python-workon-env)
   ;;   (pyvenv-activate python-workon-env))
-  (pyvenv-workon "pytorch")           ; need set $WORKON_HOME to anaconda envs in terminal
-  )
+  (when IS-MAC (pyvenv-workon "work"))           ; need set $WORKON_HOME to anaconda envs in terminal
+  (when IS-LINUX (pyvenv-workon "pytorch")))
 
 ;; TODO add workspace in modeline
                                         ;(after! doom-modeline
