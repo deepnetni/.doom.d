@@ -161,7 +161,7 @@
        ;;plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
        (:if IS-LINUX                     ; use lsp only under linux system
-           (python +lsp)            ; beautiful is better than ugly
+           (python +lsp +pyright)            ; beautiful is better than ugly
          python)
        ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs

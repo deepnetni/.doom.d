@@ -44,9 +44,9 @@
 
 (cond
  (IS-LINUX
-  (setq doom-font (font-spec :family "Input Mono" :size 14.0 :weight 'bold)))
+  (setq doom-font (font-spec :family "Input Mono" :size 12.0 :weight 'bold)))
  (IS-MAC
-  (setq doom-font (font-spec :family "Input Mono" :size 14.0 :weight 'bold)))
+  (setq doom-font (font-spec :family "Input Mono" :size 12.0 :weight 'bold)))
  (t
   (message "### work on others platform")
   ))
