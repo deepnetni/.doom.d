@@ -256,6 +256,11 @@
 
 (map! "C-s" #'counsel-grep-or-swiper)
 
+;; (map! :after magit
+;;       :map magit-mode-map
+;;       :leader
+;;       "TAB" #'magit-section-cycle)
+
 (map! :after cc-mode
       :map c-mode-base-map
       :prefix "C-c"
