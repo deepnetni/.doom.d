@@ -62,6 +62,7 @@
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 (setq isearch-wrap-function 'ignore)
 (setq evil-search-wrap nil)
+(setq confirm-kill-emacs nil)           ; exit emacs without asking `xx exit anyway? (y or n)'
 
 ;; coding system
 (set-default buffer-file-coding-system 'utf-8-unix)   ;; replace CRLF(\r\n) with LF(\n)
@@ -256,10 +257,10 @@
 
 (map! "C-s" #'counsel-grep-or-swiper)
 
-;; (map! :after magit
-;;       :map magit-mode-map
-;;       :leader
-;;       "TAB" #'magit-section-cycle)
+(map! :map ivy-minibuffer-map
+      ;; "C-j" #'ivy-next-line
+      ;; "C-k" #'ivy-previous-line
+      "C-h" #'ivy-backward-delete-char)
 
 (map! :after cc-mode
       :map c-mode-base-map

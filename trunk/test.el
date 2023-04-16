@@ -126,4 +126,23 @@
   "Run current python file pointed by `FNAME'."
   (interactive "bRun File: ")
   (message fname)
-  (message (expand-file-name (buffer-name))))
+  (message (expand-file-name (buffer-name)))
+  (+ivy/compile)
+  (buffer-name)
+  )
+
+
+(call-interactively #'+lookup/online)
+
+(file-name-extension (buffer-name) t)   ; .el
+(file-name-extension (buffer-name))     ; el
+
+
+(string-suffix-p "pre" "hello.prex")    ; nil
+(string-suffix-p "pre" "hello.pre")     ; t
+
+(print noninteractive)
+
+
+
+(list '(a) '(1 2) '(c))
