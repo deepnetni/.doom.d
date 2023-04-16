@@ -9,6 +9,8 @@
 (setq user-full-name "Deepni"
       user-mail-address "deepnetni@163.com")
 
+(defconst IS-GUI (display-graphic-p))
+
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
 ;; - `doom-font' -- the primary font to use
@@ -44,9 +46,9 @@
 
 (cond
  (IS-LINUX
-  (setq doom-font (font-spec :family "Input Mono" :size 12.0 :weight 'bold)))
+  (setq doom-font (font-spec :family "Input Mono" :size 14.0 :weight 'bold)))
  (IS-MAC
-  (setq doom-font (font-spec :family "Input Mono" :size 12.0 :weight 'bold)))
+  (setq doom-font (font-spec :family "Input Mono" :size 14.0 :weight 'bold)))
  (t
   (message "### work on others platform")
   ))
@@ -269,9 +271,9 @@
       "u" #'hide-ifdef-undef)
 
 ;; python part
-(map! :after anaconda-mode
-      :map anaconda-mode-map
-      :i "C-," #'anaconda-mode-complete)
+;; (map! :after anaconda-mode
+;;       :map anaconda-mode-map
+;;       :i "C-," #'anaconda-mode-complete)
 
 ;; NOTE the [feature] followd :after should be a package name in the `SPACE h p' list
 (map! :after python
