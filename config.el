@@ -266,10 +266,10 @@
       ;; "C-k" #'ivy-previous-line
       "C-u" #'ivy-backward-delete-char)
 
-(map! :after helm-ag
-      :map helm-map
-      "C-j" #'helm-next-line
-      "C-k" #'helm-previous-line)
+;; (map! :after helm-ag
+;;       :map helm-map
+;;       "C-j" #'helm-next-line
+;;       "C-k" #'helm-previous-line)
 
 (map! :after cc-mode
       :map c-mode-base-map
