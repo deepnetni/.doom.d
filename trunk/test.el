@@ -132,7 +132,7 @@
   )
 
 
-(call-interactively #'+lookup/online)
+;(call-interactively #'+lookup/online)
 
 (file-name-extension (buffer-name) t)   ; .el
 (file-name-extension (buffer-name))     ; el

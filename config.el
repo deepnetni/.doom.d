@@ -41,7 +41,7 @@
 ;; 'doom-monokai-octagon/pro 'doom-miramare
 
 (if IS-GUI
-    (setq doom-theme 'obsidian)
+    (setq doom-theme 'doom-zenburn)
   (setq doom-theme 'doom-zenburn))
 
 (cond
@@ -129,6 +129,7 @@
                                         ;'(helm-ag--ignore-case)
   (setq helm-ag-insert-at-point 'symbol
         helm-ag-ignore-buffer-patterns '("\\.txt\\'" "\\.mkd\\'" "TAGS"))
+  ;; (define-key helm-map (kbd "C-j") #'helm-next-line)
   (global-set-key (kbd "C-c a") 'helm-ag-project-root)
   (global-set-key (kbd "C-l") 'helm-do-ag-project-root)
   (global-set-key (kbd "C-j") 'helm-resume))
@@ -259,10 +260,16 @@
 
 (map! "C-s" #'counsel-grep-or-swiper)
 
-(map! :map ivy-minibuffer-map
+(map! :after ivy
+      :map ivy-minibuffer-map
       ;; "C-j" #'ivy-next-line
       ;; "C-k" #'ivy-previous-line
-      "C-h" #'ivy-backward-delete-char)
+      "C-u" #'ivy-backward-delete-char)
+
+(map! :after helm-ag
+      :map helm-map
+      "C-j" #'helm-next-line
+      "C-k" #'helm-previous-line)
 
 (map! :after cc-mode
       :map c-mode-base-map
