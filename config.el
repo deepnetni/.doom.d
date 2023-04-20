@@ -46,9 +46,9 @@
 
 (cond
  (IS-LINUX
-  (setq doom-font (font-spec :family "Input Mono" :size 14.0 :weight 'bold)))
+  (setq doom-font (font-spec :family "Input Mono" :size 16.0 :weight 'bold)))
  (IS-MAC
-  (setq doom-font (font-spec :family "Input Mono" :size 14.0 :weight 'bold)))
+  (setq doom-font (font-spec :family "Input Mono" :size 16.0 :weight 'bold)))
  (t
   (message "### work on others platform")
   ))
@@ -117,7 +117,9 @@
 ;; they are implemented.
 ;;
 
-;; NOTE Packages
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ############################# Packages ############################# ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package! helm-ag
   :defer
@@ -157,6 +159,9 @@
   (push "*.json" counsel-etags-ignore-filenames)
   (push "TAGS" counsel-etags-ignore-filenames))
 
+;; (use-package! eglot
+;;   :init)
+
 (use-package! deepni
   :after (evil format-all)
                                         ;:hook evil-mode  ;; BUG Not work
@@ -176,6 +181,9 @@
                        evil-jump-forward
                        evil-jump-backward)))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ############################# Configures ############################# ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (after! which-key
   (setq which-key-idle-delay 0.4))  ;; search don't go to the beginning of the file
 
@@ -258,6 +266,10 @@
   (map! :prefix "C-c"
         "," #'+company/complete))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ############################# Keymaps ############################# ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (map! "C-s" #'counsel-grep-or-swiper)
 
 (map! :after ivy
@@ -281,6 +293,7 @@
 ;; (map! :after anaconda-mode
 ;;       :map anaconda-mode-map
 ;;       :i "C-," #'anaconda-mode-complete)
+
 
 ;; NOTE the [feature] followd :after should be a package name in the `SPACE h p' list
 (map! :after python
@@ -358,6 +371,7 @@
   (kbd "C-l") #'right-char
   (kbd "C-j") #'evil-next-line
   (kbd "C-k") #'evil-previous-line
+  (kbd "C-c C-i") #'yas-insert-snippet
   (kbd "TAB") #'yas-expand
   (kbd "M-i") #'tab-to-tab-stop)
 

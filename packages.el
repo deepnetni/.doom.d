@@ -54,3 +54,4 @@
 (package! counsel-etags)
 (package! deepni :recipe (:local-repo "trunk"))
 (package! obsidian-theme)
+;; (package! eglot)
