@@ -247,6 +247,7 @@
 (after! doom-zenburn-theme
   (custom-set-faces!
     ;; TODO configure the color of theme background, zenburn-bg, not work '(custom-themed :background "#293134")
+    ;; dark green 76905E
     `(font-lock-function-name-face :foreground ,(doom-color 'dark-cyan))
     `(region :background ,(doom-color 'base7))
     `(evil-ex-lazy-highlight :background ,(doom-color 'base7))
