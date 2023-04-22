@@ -40,9 +40,7 @@
 ;; 'doom-zenburn 'doom-miramare 'doom-one,
 ;; 'doom-monokai-octagon/pro 'doom-miramare
 
-(if IS-GUI
-    (setq doom-theme 'doom-zenburn)
-  (setq doom-theme 'doom-zenburn))
+(setq doom-theme 'doom-zenburn)
 
 (cond
  (IS-LINUX
@@ -258,15 +256,12 @@
 
 ;; NOTE Keybindings
 
-(when IS-GUI
-  ;; GUI work mode
-  (map! "C-," #'+company/complete))
+(if IS-GUI
+    (defconst prefix-global-mapkey "" "UI prefix shortcuts")
+  (defconst prefix-global-mapkey "C-c" "Terminal prefix shortcuts"))
 
-(when (not IS-GUI)
-  ;; Terminal work mode
-  (map! :prefix "C-c"
-        "," #'+company/complete))
-
+(map! :prefix prefix-global-mapkey
+      "C-," #'+company/complete)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ############################# Keymaps ############################# ;;
