@@ -254,18 +254,26 @@
     '(font-lock-comment-face :foreground "#749574")
     '(font-lock-apply-highlight :background "#81CACD")))
 
-;; NOTE Keybindings
-
-(if IS-GUI
-    (defconst prefix-global-mapkey "" "UI prefix shortcuts")
-  (defconst prefix-global-mapkey "C-c" "Terminal prefix shortcuts"))
-
-(map! :prefix prefix-global-mapkey
-      "C-," #'+company/complete)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ############################# Keymaps ############################# ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+                                        ; (if IS-GUI
+                                        ;     (defconst prefix-global-mapkey "" "UI prefix shortcuts")
+                                        ;   (defconst prefix-global-mapkey "C-c" "Terminal prefix shortcuts"))
+
+                                        ;(map! :prefix prefix-global-mapkey
+                                        ;      "C-," #'+company/complete)
+
+(when IS-GUI
+  ;; GUI client
+  (map! "C-," #'+company/complete))
+
+(when (not IS-GUI)
+  ;; Terminal client, which take `C-,' as `,'
+  (map! :prefix "C-c"
+        "," #'+company/complete))
+
 (map! "C-s" #'counsel-grep-or-swiper)
 
 (map! :after ivy
