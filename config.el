@@ -44,9 +44,9 @@
 
 (cond
  (IS-LINUX
-  (setq doom-font (font-spec :family "Input Mono" :size 16.0 :weight 'bold)))
+  (setq doom-font (font-spec :family "Input Mono" :size 12.0 :weight 'bold)))
  (IS-MAC
-  (setq doom-font (font-spec :family "Input Mono" :size 16.0 :weight 'bold)))
+  (setq doom-font (font-spec :family "Input Mono" :size 12.0 :weight 'bold)))
  (t
   (message "### work on others platform")
   ))
@@ -174,8 +174,8 @@
                                         ;evil-ex-search-previous
                        better-jumper-jump_backward
                        better-jumper-jump_forward
-                       evil-ex-search-word-backward
-                       evil-ex-search-word-forward
+                                        ; evil-ex-search-word-backward
+                                        ; evil-ex-search-word-forward
                        evil-jump-forward
                        evil-jump-backward)))
 
@@ -303,10 +303,16 @@
 (map! :after python
       :map python-mode-map
       :n "M-n" #'+ivy/compile
+      :n "M-N" #'recompile
       :n "C-c C-c" #'kill-compilation
       :prefix "C-c C-p"
       :desc "activate conda env"
       :n "c" #'pyvenv-workon)
+
+(map! :after json-mode
+      :map json-mode-map
+      :n "M-n" #'+ivy/compile
+      :n "M-N" #'recompile)
 
 (map! :leader
       :prefix "f"
