@@ -311,6 +311,7 @@
 
 (map! :after json-mode
       :map json-mode-map
+      :n "C-c C-c" #'kill-compilation
       :n "M-n" #'+ivy/compile
       :n "M-N" #'recompile)
 
