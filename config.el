@@ -180,6 +180,23 @@
                        evil-jump-forward
                        evil-jump-backward)))
 
+(use-package! indent-guide
+  :config
+  ;; (set-face-background 'indent-guide-face "dimgray")
+  ;; (setq indent-guide-delay 0.1)
+  (when (not IS-GUI)
+    (setq indent-guide-char "|")
+    (setq indent-guide-recursive t)
+    (indent-guide-global-mode)))
+
+(use-package! highlight-indent-guides
+  :init
+  (when IS-GUI
+    (add-hook 'prog-mode-hook 'highlight-indent-guides-mode))
+  :config
+  ;; bitmap, character
+  (setq highlight-indent-guides-method 'bitmap)
+  )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ############################# Configures ############################# ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
