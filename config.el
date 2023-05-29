@@ -219,6 +219,10 @@
 (after! evil (defalias #'forward-evil-word #'forward-evil-symbol)) ;; see characters with - or _ as one word
 
 (after! cc-mode
+  (add-hook 'c-mode-hook (lambda ()
+                           (setq tab-width 4)
+                           (setq c-basic-offset 4)
+                           (setq backward-delete-char-untabify-method nil)))
   (add-hook 'c-mode-common-hook (lambda ()
                                   (setq hide-ifdef-shadow t)
                                   (hide-ifdef-mode)
