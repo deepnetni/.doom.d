@@ -46,7 +46,7 @@
  (IS-LINUX
   (setq doom-font (font-spec :family "Input Mono" :size 12.0 :weight 'bold)))
  (IS-MAC
-  (setq doom-font (font-spec :family "Input Mono" :size 12.0 :weight 'bold)))
+  (setq doom-font (font-spec :family "Input Mono" :size 16.0 :weight 'bold)))
  (t
   (message "### work on others platform")
   ))
@@ -170,7 +170,7 @@
   (add-hook 'evil-mode-hook #'deepni-mode)
   :config
   (deepni/goto-center (pop-tag-mark
-                                        ;evil-goto-mark
+                       evil-goto-mark
                                         ;evil-ex-search-next
                                         ;evil-ex-search-previous
                        better-jumper-jump_backward
