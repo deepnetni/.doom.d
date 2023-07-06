@@ -260,6 +260,13 @@
   (when IS-MAC (pyvenv-workon "work"))           ; need set $WORKON_HOME to anaconda envs in terminal
   (when IS-LINUX (pyvenv-workon "pytorch")))
 
+(after! json
+  (add-hook 'json-mode-hook
+            (lambda ()
+              (make-local-variable 'js-indent-level)
+              (setq js-indent-level 4)
+              (setq tab-width 4))))
+
 ;; TODO add workspace in modeline
                                         ;(after! doom-modeline
                                         ;  (setq doom-modeline-persp-name t))
