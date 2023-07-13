@@ -54,7 +54,7 @@
 (package! counsel-etags)
 (package! deepni :recipe (:local-repo "trunk"))
 (package! obsidian-theme)
-;; (package! indent-guide :recipe (:host github :repo "zk-phi/indene"))
+;; (package! indent-guide :recipe (:host github :repo "zk-phi/indent-guide"))
 (package! indent-guide)
 (package! highlight-indent-guides)
 ;; (package! eglot)

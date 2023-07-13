@@ -181,6 +181,7 @@
                        evil-jump-backward)))
 
 (use-package! indent-guide
+  :init
   :config
   ;; (set-face-background 'indent-guide-face "dimgray")
   ;; (setq indent-guide-delay 0.1)
@@ -195,8 +196,11 @@
     (add-hook 'prog-mode-hook 'highlight-indent-guides-mode))
   :config
   ;; bitmap, character
+  ;; (when (doom-context-p 'init)
+  ;;   (add-hook 'doom-first-buffer-hook #'highlight-indent-guides-auto-set-faces))
   (setq highlight-indent-guides-method 'bitmap)
   )
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ############################# Configures ############################# ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -257,7 +261,7 @@
   ;; (when (file-exists-p python-workon-env)
   ;;   ;; (pythonic-activate python-workon-env)
   ;;   (pyvenv-activate python-workon-env))
-  (when IS-MAC (pyvenv-workon "work"))           ; need set $WORKON_HOME to anaconda envs in terminal
+  (when IS-MAC (pyvenv-workon "work"))           ; TODO need set $WORKON_HOME to anaconda envs in terminal
   (when IS-LINUX (pyvenv-workon "pytorch")))
 
 (after! json
