@@ -420,6 +420,7 @@
   (kbd "M-i") #'tab-to-tab-stop)
 
 (evil-define-key* 'motion 'global
+  (kbd "C-w C-]") #'xref-find-definitions-other-window
   (kbd "C-f") #'counsel-find-file
   (kbd "C-e") #'evil-end-of-line
   (kbd "C-b") #'evil-first-non-blank
