@@ -288,10 +288,12 @@
     '(font-lock-apply-highlight :background "#81CACD")))
 
 ;; configure title bar
-(add-to-list 'default-frame-alist '(undecorated . t))    ;; hide title bar
-;;(add-to-list 'default-frame-alist '(undecorated-round . t)) ;; hide title bar with round slides
-;;(add-to-list 'default-frame-alist '(drag-internal-border . 1))
-;;(add-to-list 'default-frame-alist '(internal-border-width . 1)) ;; support resize by mouse
+(add-to-list 'default-frame-alist '(undecorated . t)) ;; hide title bar
+                                        ;(add-to-list 'default-frame-alist '(drag-internal-border . 1))
+                                        ;(add-to-list 'default-frame-alist '(internal-border-width . 3))
+                                        ;(add-to-list 'default-frame-alist '(vertical-scroll-bars))
+                                        ;(add-to-list 'default-frame-alist '(left-fringe))      ;; show left fringe
+                                        ;(add-to-list 'default-frame-alist '(right-fringe . 0)) ;; close right fringe
 
 ;; show file absolute path in title bar
 (setq frame-title-format '((:eval (if (buffer-file-name)
