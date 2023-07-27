@@ -287,6 +287,17 @@
     '(font-lock-comment-face :foreground "#749574")
     '(font-lock-apply-highlight :background "#81CACD")))
 
+;; configure title bar
+(add-to-list 'default-frame-alist '(undecorated . t))    ;; hide title bar
+;;(add-to-list 'default-frame-alist '(undecorated-round . t)) ;; hide title bar with round slides
+;;(add-to-list 'default-frame-alist '(drag-internal-border . 1))
+;;(add-to-list 'default-frame-alist '(internal-border-width . 1)) ;; support resize by mouse
+
+;; show file absolute path in title bar
+(setq frame-title-format '((:eval (if (buffer-file-name)
+                                      (abbreviate-file-name (buffer-file-name))
+                                    "%b"))))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ############################# Keymaps ############################# ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
