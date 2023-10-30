@@ -62,8 +62,8 @@
 
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 (setq isearch-wrap-function 'ignore)
-(setq evil-search-wrap nil)
-(setq confirm-kill-emacs nil)           ; exit emacs without asking `xx exit anyway? (y or n)'
+(setq evil-search-wrap nil)     ;; search don't go to the beginning of the file
+(setq confirm-kill-emacs nil)   ;; exit emacs without asking `xx exit anyway? (y or n)'
 
 ;; coding system
 (set-default buffer-file-coding-system 'utf-8-unix)   ;; replace CRLF(\r\n) with LF(\n)
@@ -183,8 +183,8 @@
 (use-package! indent-guide
   :init
   :config
-  ;; (set-face-background 'indent-guide-face "dimgray")
-  ;; (setq indent-guide-delay 0.1)
+                                        ;(set-face-background 'indent-guide-face "dimgray")
+                                        ;(setq indent-guide-delay 0.1)
   (when (not IS-GUI)
     (setq indent-guide-char "|")
     (setq indent-guide-recursive t)
@@ -195,17 +195,20 @@
   (when IS-GUI
     (add-hook 'prog-mode-hook 'highlight-indent-guides-mode))
   :config
+                                        ; (when (doom-context-p 'init)
+                                        ;   (add-hook 'doom-first-buffer-hook #'highlight-indent-guides-auto-set-faces))
   ;; bitmap, character
-  ;; (when (doom-context-p 'init)
-  ;;   (add-hook 'doom-first-buffer-hook #'highlight-indent-guides-auto-set-faces))
   (setq highlight-indent-guides-method 'bitmap)
+                                        ; (setq highlight-indent-guides-auto-odd-face-perc 25)
+                                        ; (setq highlight-indent-guides-auto-even-face-perc 30)
+  (setq highlight-indent-guides-auto-character-face-perc 40)
   )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ############################# Configures ############################# ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (after! which-key
-  (setq which-key-idle-delay 0.4))  ;; search don't go to the beginning of the file
+  (setq which-key-idle-delay 0.4))
 
                                         ;(after! lookup
                                         ;  (push '("bing.com" . "https://www.bing.com/search?q=%s") +lookup-provider-url-alist))
@@ -214,7 +217,8 @@
   (map! :map hl-todo-mode-map
         :prefix "C-c"
         "i" #'hl-todo-insert
-        "o" #'hl-todo-occur))
+        "o" #'hl-todo-occur)
+  (add-to-list 'hl-todo-keyword-faces '("WHY" . "#FF0000")))
 
 (after! counsel
   (advice-add 'counsel-bookmark :after
@@ -296,9 +300,9 @@
                                         ;(add-to-list 'default-frame-alist '(right-fringe . 0)) ;; close right fringe
 
 ;; show file absolute path in title bar
-(setq frame-title-format '((:eval (if (buffer-file-name)
-                                      (abbreviate-file-name (buffer-file-name))
-                                    "%b"))))
+;; (setq frame-title-format '((:eval (if (buffer-file-name)
+;;                                       (abbreviate-file-name (buffer-file-name))
+;;                                     "%b"))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ############################# Keymaps ############################# ;;
