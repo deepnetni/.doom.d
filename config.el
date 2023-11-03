@@ -44,8 +44,8 @@
 
 (cond
  (IS-LINUX
-  (setq doom-font (font-spec :family "JetBrains Mono" :size 12.0 :weight 'bold)))
- ;;(setq doom-font (font-spec :family "Input Mono" :size 12.0 :weight 'bold)))
+  ;;(setq doom-font (font-spec :family "JetBrains Mono" :size 12.0 :weight 'bold)))
+  (setq doom-font (font-spec :family "Input Mono" :size 12.0 :weight 'bold)))
  (IS-MAC
   (setq doom-font (font-spec :family "Input Mono" :size 16.0 :weight 'bold)))
  (t
@@ -121,10 +121,10 @@
 ;; ############################# Packages ############################# ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package! helm-ag
+(use-package! helm-ag ;; helm-mode is not compatible with ivy-mode; therefore don't bind to any mode
   :defer
-  :hook ((c-mode-common . helm-mode)   ; equal to (add-hook 'c-mode-hook #'helm-mode)
-         (python-mode . helm-mode))
+  ;;:hook ((c-mode-common . helm-mode)   ; equal to (add-hook 'c-mode-hook #'helm-mode)
+  ;;       (python-mode . helm-mode))
   :init
                                         ;'(helm-ag-base-command "ag --nocolor --nogroup -w")
                                         ;'(helm-ag-command-option "--all-text")
@@ -344,7 +344,7 @@
       ;; "C-k" #'ivy-previous-line
       "C-u" #'ivy-backward-delete-char)
 
-(map! :after helm-ag
+(map! :after helm-mode
       :map helm-map
       "C-j" #'helm-next-line
       "C-k" #'helm-previous-line
