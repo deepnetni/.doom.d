@@ -131,7 +131,12 @@
                                         ;'(helm-ag--ignore-case)
   (setq helm-ag-insert-at-point 'symbol
         helm-ag-ignore-buffer-patterns '("\\.txt\\'" "\\.mkd\\'" "TAGS"))
-  ;; (define-key helm-map (kbd "C-j") #'helm-next-line)
+  (setq helm-ag-use-temp-buffer t)
+  ;; `helm-do-ag' need backslash to match whitespace while `helm-ag' treat directly.
+  ;; `helm-do-ag' treats words which starts with `-' as command line option, e.g. -Gpy xx.
+  ;; `helm-ag' treats words after `--' as search patten, e.g. -- --count search --count.
+  ;; don't add space between short option and its values, e.g. `-tcpp' is ok, `-t cpp' is not ok.
+  ;; use `=' for long option, e.g. `--ignore=pattern' not use `--ignore pattern'.
   (global-set-key (kbd "C-c a") 'helm-ag-project-root)
   (global-set-key (kbd "C-l") 'helm-do-ag-project-root)
   (global-set-key (kbd "C-j") 'helm-resume))
@@ -342,7 +347,9 @@
 (map! :after helm-ag
       :map helm-map
       "C-j" #'helm-next-line
-      "C-k" #'helm-previous-line)
+      "C-k" #'helm-previous-line
+      "C-s" #'helm-execute-persistent-action ;; show file content temporarily.
+      )
 
 (map! :after cc-mode
       :map c-mode-base-map
