@@ -44,7 +44,8 @@
 
 (cond
  (IS-LINUX
-  (setq doom-font (font-spec :family "Input Mono" :size 12.0 :weight 'bold)))
+  (setq doom-font (font-spec :family "JetBrains Mono" :size 12.0 :weight 'bold)))
+ ;;(setq doom-font (font-spec :family "Input Mono" :size 12.0 :weight 'bold)))
  (IS-MAC
   (setq doom-font (font-spec :family "Input Mono" :size 16.0 :weight 'bold)))
  (t
@@ -204,6 +205,12 @@
   (setq highlight-indent-guides-auto-character-face-perc 40)
   )
 
+(use-package! nerd-icons-ivy-rich
+  :init
+  (nerd-icons-ivy-rich-mode 1)
+  (ivy-rich-mode 1)
+  (setq nerd-icons-ivy-rich-color-icon nil)
+  )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ############################# Configures ############################# ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -332,10 +339,10 @@
       ;; "C-k" #'ivy-previous-line
       "C-u" #'ivy-backward-delete-char)
 
-;; (map! :after helm-ag
-;;       :map helm-map
-;;       "C-j" #'helm-next-line
-;;       "C-k" #'helm-previous-line)
+(map! :after helm-ag
+      :map helm-map
+      "C-j" #'helm-next-line
+      "C-k" #'helm-previous-line)
 
 (map! :after cc-mode
       :map c-mode-base-map
