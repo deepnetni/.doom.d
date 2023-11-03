@@ -42,6 +42,8 @@
 
 (setq doom-theme 'doom-zenburn)
 
+
+;; Fonts in terminal Emacs is decideby by the terminal settings.
 (cond
  (IS-LINUX
   ;;(setq doom-font (font-spec :family "JetBrains Mono" :size 12.0 :weight 'bold)))
