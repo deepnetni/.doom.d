@@ -169,25 +169,6 @@
 ;; (use-package! eglot
 ;;   :init)
 
-(use-package! deepni
-  :after (evil format-all)
-                                        ;:hook evil-mode  ;; BUG Not work
-  :bind (:map deepni-mode-map
-              ("C-c C-f" . #'deepni/format-code))  ;; using `:bind' will load package when bootup
-  :init
-  (add-hook 'evil-mode-hook #'deepni-mode)
-  :config
-  (deepni/goto-center (pop-tag-mark
-                       evil-goto-mark
-                                        ;evil-ex-search-next
-                                        ;evil-ex-search-previous
-                       better-jumper-jump_backward
-                       better-jumper-jump_forward
-                                        ; evil-ex-search-word-backward
-                                        ; evil-ex-search-word-forward
-                       evil-jump-forward
-                       evil-jump-backward)))
-
 (use-package! indent-guide
   :init
   :config
@@ -217,6 +198,27 @@
   (nerd-icons-ivy-rich-mode 1)
   (ivy-rich-mode 1)
   (setq nerd-icons-ivy-rich-color-icon nil)
+  )
+
+(use-package! deepni
+  :after (evil format-all)
+                                        ;:hook evil-mode  ;; BUG Not work
+  :bind (:map deepni-mode-map
+              ("C-c C-f" . #'deepni/format-code))  ;; using `:bind' will load package when bootup
+  :init
+  (add-hook 'evil-mode-hook #'deepni-mode)
+  :config
+  (deepni/goto-center (pop-tag-mark
+                       evil-goto-mark
+                                        ;evil-ex-search-next
+                                        ;evil-ex-search-previous
+                       better-jumper-jump_backward
+                       better-jumper-jump_forward
+                                        ; evil-ex-search-word-backward
+                                        ; evil-ex-search-word-forward
+                       evil-jump-forward
+                       evil-jump-backward))
+  (setq comment-empty-lines nil)
   )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ############################# Configures ############################# ;;
@@ -350,7 +352,7 @@
       :map helm-map
       "C-j" #'helm-next-line
       "C-k" #'helm-previous-line
-      "C-s" #'helm-execute-persistent-action ;; show file content temporarily.
+      "C-p" #'helm-execute-persistent-action ;; show file content temporarily.
       )
 
 (map! :after cc-mode
@@ -388,6 +390,7 @@
 
 (map! :leader
       :prefix "w"
+      :desc "delete other windows"
       "O" #'delete-other-windows)
 
 (map! :leader
