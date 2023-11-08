@@ -346,7 +346,9 @@
       :map ivy-minibuffer-map
       ;; "C-j" #'ivy-next-line
       ;; "C-k" #'ivy-previous-line
-      "C-u" #'ivy-backward-delete-char)
+      "C-u" #'ivy-backward-delete-char
+      :map doom-leader-map
+      "SPC" #'+ivy/switch-workspace-buffer)
 
 (map! :after helm-mode
       :map helm-map
