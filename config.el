@@ -359,9 +359,14 @@
 
 (map! :after cc-mode
       :map c-mode-base-map
+      :n "M-n" #'+ivy/compile
+      :n "M-N" #'recompile
+      :n "C-c C-c" #'kill-compilation
       :prefix "C-c"
       "d" #'hide-ifdef-define
-      "u" #'hide-ifdef-undef)
+      "u" #'hide-ifdef-undef
+      "C-d" #'gendoxy-tag
+      "C-h" #'gendoxy-header)
 
 ;; python part
 ;; (map! :after anaconda-mode

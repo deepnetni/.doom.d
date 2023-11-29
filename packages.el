@@ -53,6 +53,7 @@
 (package! helm-ag)
 (package! counsel-etags)
 (package! deepni :recipe (:local-repo "trunk"))
+;;(package! company-cmake :recipe (:local-repo "trunk"))
 (package! obsidian-theme)
 ;; (package! indent-guide :recipe (:host github :repo "zk-phi/indent-guide"))
 (package! indent-guide)
@@ -62,3 +63,4 @@
 (package! nerd-icons-ivy-rich)
 ;; (disable-packages! all-the-icons)
 ;; (package! eglot)
+(package! gendoxy :recipe (:host github :repo "mp81ss/gendoxy"))
