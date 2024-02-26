@@ -454,8 +454,8 @@
                                         ;(define-key evil-normal-state-map (kbd "C-,") 'evil-window-decrease-width)
 
 (evil-define-key* 'insert 'global
-  (kbd "C-h") #'left-char
-  (kbd "C-l") #'right-char
+                                        ;(kbd "C-h") #'left-char
+                                        ;(kbd "C-l") #'right-char
   (kbd "C-j") #'evil-next-line
   (kbd "C-k") #'evil-previous-line
   (kbd "C-c C-i") #'yas-insert-snippet
