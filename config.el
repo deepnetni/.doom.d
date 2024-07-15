@@ -354,6 +354,8 @@
       :map helm-map
       "C-j" #'helm-next-line
       "C-k" #'helm-previous-line
+      "M-j" #'helm-next-page
+      "M-k" #'helm-previous-page
       "C-p" #'helm-execute-persistent-action ;; show file content temporarily.
       )
 

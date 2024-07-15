@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: class.torch
+# key: class
+# --
+
+
+class ${0:Name}(nn.Module):
+    def __init__(self, $1):
+        super().__init__()
+        pass
+
+    def forward(self, x):
+        pass
