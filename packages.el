@@ -64,3 +64,4 @@
 ;; (disable-packages! all-the-icons)
 ;; (package! eglot)
 (package! gendoxy :recipe (:host github :repo "mp81ss/gendoxy"))
+(package! xclip)

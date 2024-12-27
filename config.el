@@ -200,6 +200,20 @@
   (setq nerd-icons-ivy-rich-color-icon nil)
   )
 
+;; copy from emacs -nw terminal session to system clipboard
+;; https://github.com/emacsmirror/xclip/blob/ec064e6ea9b236e56c0966b2ce03870a12a5d78d/xclip.el#L33
+;; (use-package! xclip
+;;   :config
+;;                                         ; (setq xclip-program "wl-copy")
+;;                                         ; (setq xclip-method (quote wl-copy))
+;;                                         ; (setq xclip-program "pbcopy")
+;;                                         ; (setq xclip-method (quote pbcopy))
+
+;;   (setq xclip-program "xsel"
+;;         xclip-method "xsel")
+;;   (setq xclip-select-enable-clipboard t)
+;;   (setq xclip-mode t))
+
 (use-package! deepni
   :after (evil format-all)
                                         ;:hook evil-mode  ;; BUG Not work
@@ -301,11 +315,26 @@
     ;; dark green 76905E
     `(font-lock-function-name-face :foreground ,(doom-color 'dark-cyan))
     `(region :background ,(doom-color 'base7))
-    `(evil-ex-lazy-highlight :background ,(doom-color 'base7))
+    ;; `(evil-ex-lazy-highlight :background ,(doom-color 'base7))
+    `(evil-ex-lazy-highlight :background ,(doom-color 'orange))
     '(font-lock-variable-name-face :foreground "#88C058")
     '(font-lock-keyword-face :foreground "#99B767")
     '(font-lock-comment-face :foreground "#749574")
     '(font-lock-apply-highlight :background "#81CACD")))
+
+(after! lsp-mode
+  ;; Auto configure the default root directory
+  (setq lsp-auto-guess-root t)
+  (setq lsp-file-watch-threshold 3000)
+                                        ; (setq lsp-log-io t)
+  )
+
+(after! projectile
+  (add-to-list 'projectile-globally-ignored-file-suffixes "symlink")
+  (add-to-list 'projectile-globally-ignored-file-suffixes "lnk")
+  (add-to-list 'projectile-globally-ignored-file-suffixes "tmp") ;; ignore .log, .lnk, .tmp
+  ;; (add-to-list 'projectile-globally-ignored-directories "utils")
+  )
 
 ;; configure title bar
 (add-to-list 'default-frame-alist '(undecorated . t)) ;; hide title bar
@@ -455,6 +484,9 @@
                                         ;(define-key evil-normal-state-map (kbd "C-.") 'evil-window-increase-width)
                                         ;(define-key evil-normal-state-map (kbd "C-,") 'evil-window-decrease-width)
 
+
+
+
 (evil-define-key* 'insert 'global
                                         ;(kbd "C-h") #'left-char
                                         ;(kbd "C-l") #'right-char
@@ -477,3 +509,8 @@
                                         ;(define-key evil-motion-state-map (kbd "C-2") #'+workspace/switch-to-1)
                                         ;(define-key evil-motion-state-map (kbd "C-3") #'+workspace/switch-to-2)
                                         ;(define-key evil-motion-state-map (kbd "C-4") #'+workspace/switch-to-3)
+
+
+;; (evil-define-key* 'normal
+;;   (kbd "C-c C-=") #'evil-numbers/inc-at-pt
+;;   (kbd "C-c C-_") #'evil-numbers/dec-at-pt)
