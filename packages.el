@@ -65,3 +65,4 @@
 ;; (package! eglot)
 (package! gendoxy :recipe (:host github :repo "mp81ss/gendoxy"))
 (package! xclip)
+(package! sphinx-doc)
