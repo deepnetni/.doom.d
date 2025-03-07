@@ -40,9 +40,9 @@
 ;; 'doom-zenburn 'doom-miramare 'doom-one,
 ;; 'doom-monokai-octagon/pro 'doom-miramare
 
-;; (setq package-archives '(("melpa" . "https://mirrors.ustc.edu.cn/elpa/melpa/")
-;;                          ("gnu" . "https://mirrors.ustc.edu.cn/elpa/gnu/")
-;;                          ("org" . "https://mirrors.ustc.edu.cn/elpa/org/")))
+(setq package-archives '(("melpa" . "https://mirrors.ustc.edu.cn/elpa/melpa/")
+                         ("gnu" . "https://mirrors.ustc.edu.cn/elpa/gnu/")
+                         ("org" . "https://mirrors.ustc.edu.cn/elpa/org/")))
 
 (setq doom-theme 'doom-zenburn)
 
@@ -53,7 +53,7 @@
   ;;(setq doom-font (font-spec :family "JetBrains Mono" :size 12.0 :weight 'bold)))
   (setq doom-font (font-spec :family "Input Mono" :size 12.0 :weight 'bold)))
  (IS-MAC
-  (setq doom-font (font-spec :family "Input Mono" :size 16.0 :weight 'bold)))
+  (setq doom-font (font-spec :family "Input Mono" :size 12.0 :weight 'bold)))
  (t
   (message "### work on others platform")
   ))
@@ -143,7 +143,8 @@
   ;; `helm-ag' treats words after `--' as search patten, e.g. -- --count search --count.
   ;; don't add space between short option and its values, e.g. `-tcpp' is ok, `-t cpp' is not ok.
   ;; use `=' for long option, e.g. `--ignore=pattern' not use `--ignore pattern'.
-  (global-set-key (kbd "C-c a") 'helm-ag-project-root)
+  ;; (global-set-key (kbd "C-c a") 'helm-ag-project-root)
+  (global-set-key (kbd "C-c a") 'helm-do-grep-ag)
   (global-set-key (kbd "C-l") 'helm-do-ag-project-root)
   (global-set-key (kbd "C-j") 'helm-resume))
 
@@ -220,7 +221,13 @@
 
 ;; plugin to add Google style comments
 (use-package! sphinx-doc
-  :hook (python-mode . sphinx-doc-mode))
+  :hook
+  ((python-mode . sphinx-doc-mode)
+   (c-mode . sphinx-doc-mode)
+   (c++-mode . sphinx-doc-mode))
+  :config
+  ;; (setq sphinx-doc-include-types t)
+  (setq sphinx-doc-include-undocumented t))
 
 (use-package! deepni
   :after (evil format-all)
@@ -344,6 +351,12 @@
   ;; (add-to-list 'projectile-globally-ignored-directories "utils")
   )
 
+;; (after! doom-modeline
+;;   (doom-modeline-def-segment window-number
+;;     (format "Win: %d" (deepni/get-window-number))))
+
+(add-to-list 'doom-modeline-bar-positions 'window-number)
+
 ;; configure title bar
 (add-to-list 'default-frame-alist '(undecorated . t)) ;; hide title bar
                                         ;(add-to-list 'default-frame-alist '(drag-internal-border . 1))
@@ -418,7 +431,11 @@
       :map python-mode-map
       :n "M-n" #'+ivy/compile
       :n "M-N" #'recompile
+      :n "M-m" #'deepni/python-current-file
       :n "C-c C-c" #'kill-compilation
+      :n "C-c C-m" #'sphinx-doc ; C-m refer to ret
+      :n "M-o" #'counsel-imenu
+      :i "M-o" #'counsel-imenu
       :prefix "C-c C-p"
       :desc "activate conda env"
       :n "c" #'pyvenv-workon)
@@ -459,6 +476,13 @@
       "n" #'+workspace/new-named
       "r" #'+workspace/rename)
 
+;; the priority is highest without the map
+;; (map!  :prefix "C-c"
+;;        :n "C-o" #'counsel-imenu
+;;        :i "C-o" #'counsel-imenu
+;;        )
+
+;; the globl-map's priority is lower than other <package>-mode-map
 (map! :map global-map
       :prefix "C-h"
       "C-f" #'find-function
@@ -483,6 +507,8 @@
   (kbd "M-k") #'evil-window-up
   (kbd "C-i") #'evil-jump-forward
   (kbd "C-k") #'evil-ex-nohighlight
+  ;; (kbd "C-;") #'evilnc-comment-or-uncomment-lines
+  (kbd "M-;") #'evilnc-comment-or-uncomment-lines
   (kbd "C-n") #'+workspace/new-named)
 
                                         ;(define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)

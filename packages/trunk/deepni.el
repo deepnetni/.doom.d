@@ -58,6 +58,15 @@
     (when (file-exists-p fname)
       (persp-load-state-from-file fname))))
 
+(defun deepni/python-current-file ()
+  "insert current filename in compile buffer."
+  (interactive)
+  (let ((file-name (buffer-file-name)))
+    (if file-name
+        (compile (format "python %s" file-name))
+      (message "No file associated with this buffer."))))
+
+
 ;; NOTE define minor mode
 
 (defvar deepni-mode-map (make-sparse-keymap)

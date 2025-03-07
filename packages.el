@@ -52,7 +52,7 @@
 
 (package! helm-ag)
 (package! counsel-etags)
-(package! deepni :recipe (:local-repo "trunk"))
+(package! deepni :recipe (:local-repo "packages/trunk"))
 ;;(package! company-cmake :recipe (:local-repo "trunk"))
 (package! obsidian-theme)
 ;; (package! indent-guide :recipe (:host github :repo "zk-phi/indent-guide"))
@@ -65,4 +65,4 @@
 ;; (package! eglot)
 (package! gendoxy :recipe (:host github :repo "mp81ss/gendoxy"))
 (package! xclip)
-(package! sphinx-doc)
+(package! sphinx-doc :recipe (:local-repo "packages/sphinx-doc"))
