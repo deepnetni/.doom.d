@@ -51,7 +51,7 @@
 (cond
  (IS-LINUX
   ;;(setq doom-font (font-spec :family "JetBrains Mono" :size 12.0 :weight 'bold)))
-  (setq doom-font (font-spec :family "Input Mono" :size 12.0 :weight 'bold)))
+  (setq doom-font (font-spec :family "Input Mono" :size 10.0 :weight 'bold)))
  (IS-MAC
   (setq doom-font (font-spec :family "Input Mono" :size 12.0 :weight 'bold)))
  (t
@@ -229,6 +229,14 @@
   ;; (setq sphinx-doc-include-types t)
   (setq sphinx-doc-include-undocumented t))
 
+(use-package! yaml-pro
+  :after yaml-mode
+  :hook (yaml-mode . yaml-pro-mode)
+  :config
+  (setq yaml-pro-indent-offset 2)
+  (map! :map yaml-mode-map
+        :n "C-c C-f" #'yaml-pro-format))
+
 (use-package! deepni
   :after (evil format-all)
                                         ;:hook evil-mode  ;; BUG Not work
@@ -339,7 +347,7 @@
 
 (after! lsp-mode
   ;; Auto configure the default root directory
-  (setq lsp-auto-guess-root t)
+  (setq lsp-auto-guess-root nil)
   (setq lsp-file-watch-threshold 3000)
                                         ; (setq lsp-log-io t)
   )
@@ -350,12 +358,6 @@
   (add-to-list 'projectile-globally-ignored-file-suffixes "tmp") ;; ignore .log, .lnk, .tmp
   ;; (add-to-list 'projectile-globally-ignored-directories "utils")
   )
-
-;; (after! doom-modeline
-;;   (doom-modeline-def-segment window-number
-;;     (format "Win: %d" (deepni/get-window-number))))
-
-(add-to-list 'doom-modeline-bar-positions 'window-number)
 
 ;; configure title bar
 (add-to-list 'default-frame-alist '(undecorated . t)) ;; hide title bar
@@ -451,6 +453,7 @@
       :desc "jump to dired"
       "j" #'dired-jump)
 
+
 (map! :leader
       :prefix "w"
       :desc "delete other windows"
@@ -478,8 +481,8 @@
 
 ;; the priority is highest without the map
 ;; (map!  :prefix "C-c"
-;;        :n "C-o" #'counsel-imenu
-;;        :i "C-o" #'counsel-imenu
+;;        :n "M-o" #'counsel-imenu
+;;        :i "M-o" #'counsel-imenu
 ;;        )
 
 ;; the globl-map's priority is lower than other <package>-mode-map
@@ -507,8 +510,8 @@
   (kbd "M-k") #'evil-window-up
   (kbd "C-i") #'evil-jump-forward
   (kbd "C-k") #'evil-ex-nohighlight
-  ;; (kbd "C-;") #'evilnc-comment-or-uncomment-lines
-  (kbd "M-;") #'evilnc-comment-or-uncomment-lines
+  ;; (kbd "M-;") #'evilnc-comment-or-uncomment-lines
+  (kbd "C-;") #'evilnc-comment-or-uncomment-lines
   (kbd "C-n") #'+workspace/new-named)
 
                                         ;(define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)

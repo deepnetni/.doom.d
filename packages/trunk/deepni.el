@@ -50,6 +50,14 @@
   (interactive)
   (persp-save-state-to-file (concat persp-save-dir "deep-layout")))
 
+
+(defun deepni/dired-do-rename (arg)
+  "rename file without company."
+  (interactive "P")
+  (let ((old-name (dired-get-filename)))
+    (setq new-name (read-string "Rename to: " old-name))
+    (dired-rename-file old-name new-name)))
+
 (defun deepni/load-layout ()
   "Load last time layout from file."
   (interactive)
