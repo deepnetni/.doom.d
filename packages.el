@@ -68,3 +68,4 @@
 (package! sphinx-doc :recipe (:local-repo "packages/sphinx-doc"))
 (package! yaml-pro :recipe (:local-repo "packages/yaml-pro"))
 ;; (package! tree-sitter)
+(package! pyimport)
