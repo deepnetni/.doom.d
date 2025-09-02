@@ -239,16 +239,20 @@
         :n "C-c C-f" #'yaml-pro-format))
 
 
-;; (use-package! window-select
-;;   :config
-;;   (setq window-select-shortcut-style 'qwerty)
-;;   (window-select-mode 1)
-;; (define-key ctl-x-map "o" #'window-select)
-;; (define-key ctl-x-map "C-o" #'window-select)
-;; (global-set-key (kbd "C-w 1") 'window-select)
-;; (global-set-key (kbd "C-w 2") 'window-select)
-;; (global-set-key (kbd "C-w 3") 'window-select)
-;; )
+;; (use-package! winum
+;;  :config
+;;  (winum-mode)
+
+;;  (global-set-key (kbd "C-w 0") #'winum-select-window-0-or-10)
+;;  (global-set-key (kbd "C-w 1") #'winum-select-window-1)
+;;  (global-set-key (kbd "C-w 2") #'winum-select-window-2)
+;;  (global-set-key (kbd "C-w 3") #'winum-select-window-3)
+;;  (global-set-key (kbd "C-w 4") #'winum-select-window-4)
+;;  (global-set-key (kbd "C-w 5") #'winum-select-window-5)
+;;  (global-set-key (kbd "C-w 6") #'winum-select-window-6)
+;;  (global-set-key (kbd "C-w 7") #'winum-select-window-7)
+;;  (global-set-key (kbd "C-w 8") #'winum-select-window-8)
+;;  (global-set-key (kbd "C-w 9") #'winum-select-window-9))
 
 (use-package! deepni
   :after (evil format-all)
@@ -345,8 +349,9 @@
               (setq tab-width 4))))
 
 ;; TODO add workspace in modeline
-                                        ;(after! doom-modeline
-                                        ;  (setq doom-modeline-persp-name t))
+(after! doom-modeline
+  (setq doom-modeline-modal-icon nil))
+;;   (setq doom-modeline-persp-name t))
 
 
 ;;(after! org
@@ -528,6 +533,20 @@
                                         ;  (kbd "C-o") #'evil-jump-backward
                                         ;  (kbd "C-i") #'evil-jump-forward)
 
+
+(map! :map evil-window-map
+      "0" #'winum-select-window-0-or-10
+      "1" #'winum-select-window-1
+      "2" #'winum-select-window-2
+      "3" #'winum-select-window-3
+      "4" #'winum-select-window-4
+      "5" #'winum-select-window-5
+      "6" #'winum-select-window-6
+      "7" #'winum-select-window-7
+      "8" #'winum-select-window-8
+      "9" #'winum-select-window-9
+      )
+
 (evil-define-key* 'normal 'global
   (kbd "C-w O") #'delete-other-windows
   (kbd "C-t") #'pop-tag-mark
@@ -579,3 +598,4 @@
 ;; (evil-define-key* 'normal
 ;;   (kbd "C-c C-=") #'evil-numbers/inc-at-pt
 ;;   (kbd "C-c C-_") #'evil-numbers/dec-at-pt)
+
