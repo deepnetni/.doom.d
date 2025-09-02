@@ -237,6 +237,18 @@
   (map! :map yaml-mode-map
         :n "C-c C-f" #'yaml-pro-format))
 
+
+;; (use-package! window-select
+;;   :config
+;;   (setq window-select-shortcut-style 'qwerty)
+;;   (window-select-mode 1)
+;; (define-key ctl-x-map "o" #'window-select)
+;; (define-key ctl-x-map "C-o" #'window-select)
+;; (global-set-key (kbd "C-w 1") 'window-select)
+;; (global-set-key (kbd "C-w 2") 'window-select)
+;; (global-set-key (kbd "C-w 3") 'window-select)
+;; )
+
 (use-package! deepni
   :after (evil format-all)
                                         ;:hook evil-mode  ;; BUG Not work
@@ -256,6 +268,7 @@
                        evil-jump-forward
                        evil-jump-backward))
   (setq comment-empty-lines nil)
+  ;; show api class name at the bottom line.
   (which-function-mode t)
   )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -359,8 +372,9 @@
   (setq lsp-file-watch-threshold 3000)
                                         ; (setq lsp-log-io t)
   (setq lsp-headerline-breadcrumb-enable t
-                                        ; lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols)
-        lsp-headerline-breadcrumb-segments '(symbols)
+        ;; show class name at the head of buffer
+        lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols)
+                                        ; lsp-headerline-breadcrumb-segments '(symbols)
         )
   )
 
@@ -370,6 +384,7 @@
   (add-to-list 'projectile-globally-ignored-file-suffixes "tmp") ;; ignore .log, .lnk, .tmp
   ;; (add-to-list 'projectile-globally-ignored-directories "utils")
   )
+
 
 ;; configure title bar
 (add-to-list 'default-frame-alist '(undecorated . t)) ;; hide title bar
