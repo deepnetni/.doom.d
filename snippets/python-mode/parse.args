@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: parse.args
+# key: parse
+# --
+
+import argparse
+
+def parse():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--name", help="", action="store_true")
+    parser.add_argument("--args", help="", type=str)
+
+    args = parser.parse_args()
+    return args

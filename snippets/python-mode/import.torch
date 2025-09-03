@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: import.torch
+# key: import
+# --
+
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+import einops
+from einops import rearrange
+from einops.layers.torch import Rearrange

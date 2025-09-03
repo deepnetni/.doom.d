@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: torch.model.init
+# key: init
+# --
+
+def __init__(self, $1):
+    super().__init__()
+    pass
+
+def forward(self, x):
+    pass
