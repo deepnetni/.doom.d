@@ -332,8 +332,10 @@
 
 (after! python
   (setq flycheck-flake8-maximum-line-length 90)
-  (when (file-exists-p "~/.pylintrc")
-    (setq flycheck-pylintrc "~/.pylintrc"))
+  ;; (when (file-exists-p "~/.pylintrc")
+  ;;   (setq flycheck-pylintrc "~/.pylintrc"))
+  (when (file-exists-p (expand-file-name ".pylintrc" (projectile-project-root)))
+    (setq flycheck-pylintrc (expand-file-name ".pylintrc" (projectile-project-root))))
   ;; (setq python-shell-interpreter "~/anaconda3/envs/pytorch/bin/python")
   ;; (when (file-exists-p python-workon-env)
   ;;   (pythonic-activate python-workon-env)
